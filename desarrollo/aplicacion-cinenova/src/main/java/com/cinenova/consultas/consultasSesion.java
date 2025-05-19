@@ -156,18 +156,18 @@ public class consultasSesion {
         try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", "CineNova", "CineNova")) {
             conn.setAutoCommit(false);
 
-            try (PreparedStatement psEntradas = conn.prepareStatement(deleteEntradasSQL);
-                 PreparedStatement psSesion = conn.prepareStatement(deleteSesionSQL)) {
+            try (PreparedStatement preparedStatementEntradas = conn.prepareStatement(deleteEntradasSQL);
+                 PreparedStatement preparedStatementSesion = conn.prepareStatement(deleteSesionSQL)) {
 
-                psEntradas.setInt(1, idPelicula);
-                psEntradas.setInt(2, numeroSala);
-                psEntradas.setTimestamp(3, fechaHora);
-                psEntradas.executeUpdate();
+                preparedStatementEntradas.setInt(1, idPelicula);
+                preparedStatementEntradas.setInt(2, numeroSala);
+                preparedStatementEntradas.setTimestamp(3, fechaHora);
+                preparedStatementEntradas.executeUpdate();
 
-                psSesion.setInt(1, idPelicula);
-                psSesion.setInt(2, numeroSala);
-                psSesion.setTimestamp(3, fechaHora);
-                row = psSesion.executeUpdate();
+                preparedStatementSesion.setInt(1, idPelicula);
+                preparedStatementSesion.setInt(2, numeroSala);
+                preparedStatementSesion.setTimestamp(3, fechaHora);
+                row = preparedStatementSesion.executeUpdate();
 
                 conn.commit();
 
